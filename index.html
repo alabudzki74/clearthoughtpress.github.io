@@ -27,8 +27,8 @@
       --radius2: 14px;
       --focus: 0 0 0 4px rgba(47,95,179,.16);
 
-      /* UPDATED: slightly taller topbar to fit bigger mark cleanly */
-      --topbarH: 96px;
+      /* UPDATED: slightly taller topbar to fit slightly bigger mark */
+      --topbarH: 102px;
     }
 
     *{box-sizing:border-box}
@@ -99,10 +99,7 @@
     .topbar-inner{
       max-width: 1100px;
       margin: 0 auto;
-
-      /* a touch more breathing room */
       padding: 12px 18px;
-
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -113,21 +110,20 @@
     .brand{
       display:flex;
       align-items:center;
-      gap:14px; /* slightly wider gap so the bigger mark doesn't crowd text */
+      gap:14px;
       text-decoration:none;
       min-width: 240px;
     }
 
-    /* UPDATED: slightly bigger than 64x64 + better visibility */
+    /* UPDATED: slightly bigger again */
     .mark{
-      width:72px;
-      height:72px;
+      width:76px;
+      height:76px;
       border-radius: 16px;
 
       border: 1px solid rgba(18,20,23,.16);
       background: linear-gradient(180deg, #ffffff, #f6f1e6);
 
-      /* subtle “optical weight” + crisp edge */
       box-shadow:
         0 12px 26px rgba(18,20,23,.12),
         0 1px 0 rgba(255,255,255,.70) inset;
@@ -144,12 +140,10 @@
       height:100%;
       object-fit:contain;
 
-      /* UPDATED: less padding so the logo reads larger */
-      padding:3px;
+      /* a touch less padding so the mark reads bigger */
+      padding:2px;
 
       display:block;
-
-      /* subtle boost: helps small/low-contrast logos without looking “edited” */
       filter: contrast(1.10) saturate(1.05) drop-shadow(0 1px 0 rgba(0,0,0,.06));
     }
 
