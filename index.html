@@ -13,16 +13,15 @@
 
   <style>
     :root{
-      /* Academic palette: paper + ink + muted gold */
-      --bg:#f6f3ec;          /* warm paper */
-      --paper:#ffffff;       /* true white card */
-      --ink:#121417;         /* near-black */
+      --bg:#f6f3ec;
+      --paper:#ffffff;
+      --ink:#121417;
       --text:#1b1f24;
       --muted:#5b6470;
       --line:rgba(18,20,23,.12);
       --line2:rgba(18,20,23,.08);
-      --accent:#b08a2e;      /* restrained “publisher” gold */
-      --accent2:#2f5fb3;     /* academic blue */
+      --accent:#b08a2e;
+      --accent2:#2f5fb3;
       --shadow: 0 10px 30px rgba(18,20,23,.08);
       --radius: 16px;
       --radius2: 14px;
@@ -41,7 +40,6 @@
       line-height:1.55;
     }
 
-    /* subtle paper grain */
     body::before{
       content:"";
       position:fixed;
@@ -60,7 +58,6 @@
       padding: 26px 18px 70px;
     }
 
-    /* Sticky academic header */
     .topbar{
       position: sticky;
       top: 0;
@@ -82,7 +79,6 @@
       text-decoration:none;
     }
 
-    /* Logo slot: supports either text mark OR image */
     .mark{
       width:46px;height:46px;
       border-radius: 12px;
@@ -334,21 +330,24 @@
       gap: 14px;
       align-items:flex-start;
     }
+
+    /* ✅ Featured cover now supports REAL image */
     .featured-cover{
       width: 86px;
       height: 110px;
       border-radius: 12px;
       border: 1px solid var(--line);
+      overflow:hidden;
       background: linear-gradient(180deg, rgba(176,138,46,.10), rgba(47,95,179,.06));
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-start;
-      padding: 10px;
-      color: var(--ink);
-      font-family: "Source Serif 4", serif;
-      font-weight: 700;
-      letter-spacing: .02em;
+      flex: 0 0 auto;
     }
+    .featured-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
     .featured h4{margin:0 0 6px; font-size: 18px; color: var(--ink)}
     .featured ul{margin:10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px}
     .featured .cta{margin-top: 12px}
@@ -368,22 +367,32 @@
       overflow:hidden;
       box-shadow: 0 8px 18px rgba(18,20,23,.05);
     }
+
+    /* ✅ FIXED: cover area is now a proper image container */
     .cover{
-      height: 140px;
-      background:
-        linear-gradient(180deg, rgba(176,138,46,.08), rgba(255,255,255,.65));
-      display:flex;
-      align-items:flex-end;
-      padding: 12px;
+      height: 180px;
+      position: relative;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(176,138,46,.08), rgba(255,255,255,.65));
     }
-    .cover span{
+    .cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .cover .tag{
+      position:absolute;
+      left: 12px;
+      bottom: 12px;
       font-size: 12px;
       color: var(--ink);
       border:1px solid var(--line);
-      background: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.90);
       padding: 6px 8px;
       border-radius: 999px;
     }
+
     .book .meta{padding: 12px}
     .book .title{margin:0 0 4px; font-size: 14px; font-weight: 600; color: var(--ink)}
     .book .desc{margin:0; font-size: 13px; color: var(--muted)}
@@ -435,13 +444,11 @@
     <div class="topbar">
       <a class="brand" href="#top" aria-label="Clear Thought Press home">
         <div class="mark" aria-label="Logo">
-          <!-- OPTION 1: Use your logo image:
-               Put your logo file in the repo (e.g., logo.png),
-               then replace the span below with:
-               <img src="logo.png" alt="Clear Thought Press logo">
+          <!-- IMPORTANT:
+               Rename your logo file to EXACTLY: Logo.png
+               and upload it next to index.html in the repo.
           -->
-        <img src="logo.png" alt="Clear Thought Press logo">
-
+          <img src="Logo.png" alt="Clear Thought Press logo">
         </div>
         <div>
           <h1>Clear Thought Press</h1>
@@ -552,7 +559,9 @@
           <div>
             <div class="featured">
               <div class="featured-head">
-                <div class="featured-cover">CTP</div>
+                <div class="featured-cover">
+                  <img src="Cover.png" alt="Word Formation Exercises cover">
+                </div>
                 <div>
                   <h4 style="margin:0;">Word Formation Exercises</h4>
                   <p class="small" style="margin:4px 0 0;">
@@ -577,11 +586,10 @@
 
             <div class="book-grid">
               <div class="book">
-               <div class="cover">
- <img src="./Cover.png" alt="Word Formation Exercises cover">
-  <span>Workbook</span>
-</div>
-
+                <div class="cover">
+                  <img src="Cover.png" alt="Word Formation Exercises cover">
+                  <span class="tag">Workbook</span>
+                </div>
                 <div class="meta">
                   <p class="title">Word Formation Exercises</p>
                   <p class="desc">B1–C2 • Sets • Answer key</p>
@@ -589,7 +597,10 @@
               </div>
 
               <div class="book">
-                <div class="cover"><span>Coming soon</span></div>
+                <div class="cover">
+                  <img src="Cover.png" alt="Placeholder cover">
+                  <span class="tag">Coming soon</span>
+                </div>
                 <div class="meta">
                   <p class="title">Diagnostic Test (B1 → C2)</p>
                   <p class="desc">Placement + profile mapping</p>
@@ -597,7 +608,10 @@
               </div>
 
               <div class="book">
-                <div class="cover"><span>Coming soon</span></div>
+                <div class="cover">
+                  <img src="Cover.png" alt="Placeholder cover">
+                  <span class="tag">Coming soon</span>
+                </div>
                 <div class="meta">
                   <p class="title">Teacher’s Guide</p>
                   <p class="desc">Implementation notes + pacing</p>
@@ -684,3 +698,4 @@
   </div>
 </body>
 </html>
+
