@@ -53,6 +53,16 @@
       gap:12px;
       text-decoration:none;
     }
+
+    /* LOGO: uses your uploaded file */
+    .logo{
+      height:44px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.35));
+    }
+
+    /* Keep .mark in case you ever want a fallback square */
     .mark{
       width:44px;height:44px;
       border-radius: 14px;
@@ -306,7 +316,8 @@
   <div class="wrap">
     <div class="topbar">
       <a class="brand" href="#top">
-        <div class="mark">CTP</div>
+        <!-- CHANGE THIS to logo.svg if your file is SVG -->
+        <img class="logo" src="logo.png" alt="Clear Thought Press logo">
         <div>
           <h1>Clear Thought Press</h1>
           <p>Independent micro-publisher</p>
@@ -359,7 +370,6 @@
         <div class="grid3">
           <div class="card">
             <div class="icon" aria-hidden="true">
-              <!-- icon: target -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M12 22a10 10 0 1 0-10-10" stroke="currentColor" stroke-width="2" opacity=".85"/>
                 <path d="M12 18a6 6 0 1 0-6-6" stroke="currentColor" stroke-width="2" opacity=".85"/>
@@ -372,7 +382,6 @@
 
           <div class="card">
             <div class="icon" aria-hidden="true">
-              <!-- icon: layout -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M4 4h16v6H4zM4 14h7v6H4zM13 14h7v6h-7z" stroke="currentColor" stroke-width="2" opacity=".85"/>
               </svg>
@@ -383,7 +392,6 @@
 
           <div class="card">
             <div class="icon" aria-hidden="true">
-              <!-- icon: pen -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M12 20h9" stroke="currentColor" stroke-width="2" opacity=".85"/>
                 <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5z" stroke="currentColor" stroke-width="2" opacity=".85"/>
@@ -475,3 +483,4 @@
   </div>
 </body>
 </html>
+
