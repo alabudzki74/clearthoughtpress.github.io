@@ -64,7 +64,7 @@
 
     a{color:inherit}
 
-    /* Skip link (proper, classic accessibility) */
+    /* Skip link */
     .skip{
       position:absolute;
       left:12px;
@@ -86,7 +86,6 @@
       padding: 18px 18px 70px;
     }
 
-    /* Make sticky bar feel “real”: full width, centered content */
     .topbar{
       position: sticky;
       top: 0;
@@ -111,6 +110,7 @@
       align-items:center;
       gap:12px;
       text-decoration:none;
+      min-width: 220px;
     }
 
     .mark{
@@ -133,7 +133,6 @@
       display:block;
     }
 
-    /* fallback if logo fails */
     .mark .fallback-text{
       display:none;
       font-weight:800;
@@ -161,6 +160,7 @@
       gap: 10px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      align-items:center;
     }
     .nav a{
       text-decoration:none;
@@ -261,6 +261,14 @@
       box-shadow: 0 10px 24px rgba(18,20,23,.08);
     }
     button.btn{appearance:none; -webkit-appearance:none;}
+
+    /* Language toggle button fits nav nicely */
+    .nav button.btn{
+      padding: 8px 10px;
+      font-size: 13px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.65);
+    }
 
     .btn.primary{
       border-color: rgba(176,138,46,.35);
@@ -479,14 +487,6 @@
       .contact{grid-template-columns: 1fr}
     }
 
-    .emailLink{
-      font-weight: 600;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(176,138,46,.35);
-    }
-    .emailLink:hover{border-bottom-color: rgba(176,138,46,.75);}
-
     .form{
       display:grid;
       gap: 10px;
@@ -572,7 +572,7 @@
 </head>
 
 <body>
-  <a class="skip" href="#top">Skip to content</a>
+  <a class="skip" href="#top" data-i18n="skip">Skip to content</a>
 
   <header class="topbar" role="banner">
     <div class="topbar-inner">
@@ -583,15 +583,16 @@
           <span class="fallback-text">CTP</span>
         </div>
         <div>
-          <h1>Clear Thought Press</h1>
-          <p>Independent micro-publisher</p>
+          <h1 data-i18n="brand_name">Clear Thought Press</h1>
+          <p data-i18n="brand_tag">Independent micro-publisher</p>
         </div>
       </a>
 
       <nav class="nav" aria-label="Site">
-        <a href="#about">About</a>
-        <a href="#books">Books</a>
-        <a href="#contact">Contact</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#books" data-i18n="nav_books">Books</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+        <button class="btn" id="langToggle" type="button" aria-label="Switch to Polish">PL</button>
       </nav>
     </div>
   </header>
@@ -601,34 +602,34 @@
       <section class="hero">
         <div class="hero-grid">
           <div>
-            <p class="kicker">Precision English • Structure • Clear thinking</p>
-            <h2>Language for people who refuse to think vaguely.</h2>
-            <p>
+            <p class="kicker" data-i18n="kicker">Precision English • Structure • Clear thinking</p>
+            <h2 data-i18n="hero_title">Language for people who refuse to think vaguely.</h2>
+            <p data-i18n="hero_p">
               Clear Thought Press publishes advanced English learning materials for serious learners, teachers,
               and exam candidates. No noise, no “hacks” — just careful practice that builds control, accuracy, and meaning.
             </p>
 
             <div class="cta">
-              <a class="btn primary" href="https://payhip.com/ClearThoughtPress">Visit Payhip store</a>
-              <a class="btn" href="https://english4u7.gumroad.com">Visit Gumroad store</a>
+              <a class="btn primary" href="https://payhip.com/ClearThoughtPress" data-i18n="cta_payhip">Visit Payhip store</a>
+              <a class="btn" href="https://english4u7.gumroad.com" data-i18n="cta_gumroad">Visit Gumroad store</a>
             </div>
 
             <div class="pill">
-              <span class="mono">B1 → C2</span>
-              <span>Workbooks • Keys • Diagnostic tools</span>
+              <span class="mono" data-i18n="pill_levels">B1 → C2</span>
+              <span data-i18n="pill_right">Workbooks • Keys • Diagnostic tools</span>
             </div>
 
             <div class="badges" aria-label="Highlights">
-              <div class="badge"><strong>Exam-ready</strong><br>Designed for real performance</div>
-              <div class="badge"><strong>Answer keys</strong><br>Clear solutions + checks</div>
-              <div class="badge"><strong>Print-friendly</strong><br>Clean pages, low clutter</div>
-              <div class="badge"><strong>Teacher-aware</strong><br>Built for classrooms & self-study</div>
+              <div class="badge"><strong data-i18n="badge1a">Exam-ready</strong><br><span data-i18n="badge1b">Designed for real performance</span></div>
+              <div class="badge"><strong data-i18n="badge2a">Answer keys</strong><br><span data-i18n="badge2b">Clear solutions + checks</span></div>
+              <div class="badge"><strong data-i18n="badge3a">Print-friendly</strong><br><span data-i18n="badge3b">Clean pages, low clutter</span></div>
+              <div class="badge"><strong data-i18n="badge4a">Teacher-aware</strong><br><span data-i18n="badge4b">Built for classrooms & self-study</span></div>
             </div>
           </div>
 
           <aside class="sidecard" aria-label="Publisher note">
-            <h3>Publisher’s note</h3>
-            <p>
+            <h3 data-i18n="pub_note_h">Publisher’s note</h3>
+            <p data-i18n="pub_note_p">
               We treat language as a tool for thought — not decoration.
               The goal is disciplined expression: precise meaning, stable structure, and confident output.
             </p>
@@ -639,8 +640,8 @@
       <div class="divider"></div>
 
       <section id="about" class="section">
-        <h3>About</h3>
-        <p class="lede">
+        <h3 data-i18n="about_h">About</h3>
+        <p class="lede" data-i18n="about_p">
           Clear Thought Press is a small imprint built around one principle: better writing and speaking begins with clearer thinking.
           We publish materials that are intentionally spare, rigorous, and classroom-ready.
         </p>
@@ -649,8 +650,8 @@
       <div class="divider"></div>
 
       <section id="books" class="section">
-        <h3>Books</h3>
-        <p class="lede">
+        <h3 data-i18n="books_h">Books</h3>
+        <p class="lede" data-i18n="books_p">
           A small catalogue, built carefully. Each title focuses on repeatable skills, clean progression, and measurable improvement.
         </p>
 
@@ -662,72 +663,71 @@
                   <img src="Cover.png" alt="Word Formation Exercises cover">
                 </div>
                 <div>
-                  <h4 style="margin:0;">Word Formation Exercises</h4>
-                  <p class="small" style="margin:4px 0 0;">
+                  <h4 style="margin:0;" data-i18n="feat_title">Word Formation Exercises</h4>
+                  <p class="small" style="margin:4px 0 0;" data-i18n="feat_sub">
                     B1–C2 • Sets • Answer key • Print-friendly
                   </p>
                 </div>
               </div>
 
               <ul>
-                <li>High-frequency transformations aligned with exam expectations</li>
-                <li>Clean structure: practice → check → repeat</li>
-                <li>Designed for both self-study and classroom use</li>
+                <li data-i18n="feat_li1">High-frequency transformations aligned with exam expectations</li>
+                <li data-i18n="feat_li2">Clean structure: practice → check → repeat</li>
+                <li data-i18n="feat_li3">Designed for both self-study and classroom use</li>
               </ul>
 
               <div class="cta">
-                <a class="btn primary" href="https://payhip.com/ClearThoughtPress">Buy on Payhip</a>
-                <a class="btn" href="https://english4u7.gumroad.com">Buy on Gumroad</a>
+                <a class="btn primary" href="https://payhip.com/ClearThoughtPress" data-i18n="buy_payhip">Buy on Payhip</a>
+                <a class="btn" href="https://english4u7.gumroad.com" data-i18n="buy_gumroad">Buy on Gumroad</a>
               </div>
             </div>
 
             <div style="height:12px"></div>
 
-            <!-- FIXED: valid markup, no duplicate tags, no mismatched divs -->
             <div class="book-grid">
               <div class="book">
                 <a class="cover" href="https://payhip.com/ClearThoughtPress" target="_blank" rel="noopener noreferrer"
                    aria-label="Buy Word Formation Exercises on Payhip">
                   <img src="Cover.png" alt="Word Formation Exercises cover">
-                  <span class="tag">Workbook</span>
+                  <span class="tag" data-i18n="tag_workbook">Workbook</span>
                 </a>
                 <div class="meta">
-                  <p class="title">Word Formation Exercises</p>
-                  <p class="desc">B1–C2 • Sets • Answer key</p>
+                  <p class="title" data-i18n="grid1_title">Word Formation Exercises</p>
+                  <p class="desc" data-i18n="grid1_desc">B1–C2 • Sets • Answer key</p>
                 </div>
               </div>
 
               <div class="book">
                 <div class="cover placeholder" aria-hidden="true"></div>
                 <div class="meta">
-                  <p class="title">Diagnostic Test (B1 → C2)</p>
-                  <p class="desc">Placement + profile mapping</p>
+                  <p class="title" data-i18n="grid2_title">Diagnostic Test (B1 → C2)</p>
+                  <p class="desc" data-i18n="grid2_desc">Placement + profile mapping</p>
                 </div>
               </div>
 
               <div class="book">
                 <div class="cover placeholder" aria-hidden="true"></div>
                 <div class="meta">
-                  <p class="title">Teacher’s Guide</p>
-                  <p class="desc">Implementation notes + pacing</p>
+                  <p class="title" data-i18n="grid3_title">Teacher’s Guide</p>
+                  <p class="desc" data-i18n="grid3_desc">Implementation notes + pacing</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="card">
-            <h4 style="margin:0 0 6px;">Buy & download</h4>
-            <p class="small" style="margin:0 0 12px;">
+            <h4 style="margin:0 0 6px;" data-i18n="card_buy_h">Buy & download</h4>
+            <p class="small" style="margin:0 0 12px;" data-i18n="card_buy_p">
               Digital editions and printable workbooks are available here:
             </p>
             <div class="cta" style="margin:0;">
-              <a class="btn primary" href="https://payhip.com/ClearThoughtPress">Payhip</a>
-              <a class="btn" href="https://english4u7.gumroad.com">Gumroad</a>
+              <a class="btn primary" href="https://payhip.com/ClearThoughtPress" data-i18n="card_payhip">Payhip</a>
+              <a class="btn" href="https://english4u7.gumroad.com" data-i18n="card_gumroad">Gumroad</a>
             </div>
 
             <div class="divider" style="margin:16px 0"></div>
 
-            <p class="small" style="margin:0;">
+            <p class="small" style="margin:0;" data-i18n="card_hint">
               Want the page to show real covers? Add cover images later and I’ll wire them in cleanly.
             </p>
           </div>
@@ -737,15 +737,15 @@
       <div class="divider"></div>
 
       <section id="contact" class="section">
-        <h3>Contact</h3>
-        <p class="lede">
+        <h3 data-i18n="contact_h">Contact</h3>
+        <p class="lede" data-i18n="contact_p">
           For collaboration, schools, bulk licensing, or press inquiries, use the form below.
         </p>
 
         <div class="contact">
           <div class="card">
-            <h4 style="margin:0 0 6px;">Publishing inquiries</h4>
-            <p class="small" style="margin:0;">
+            <h4 style="margin:0 0 6px;" data-i18n="form_h">Publishing inquiries</h4>
+            <p class="small" style="margin:0;" data-i18n="form_small">
               Collaboration • institutional licensing • classroom bundles • press
             </p>
 
@@ -754,38 +754,38 @@
                   method="POST">
               <div class="row">
                 <div class="field">
-                  <label for="name">Name</label>
+                  <label for="name" data-i18n="name_label">Name</label>
                   <input id="name" name="name" type="text" autocomplete="name" required>
                 </div>
 
                 <div class="field">
-                  <label for="email">Your email</label>
+                  <label for="email" data-i18n="email_label">Your email</label>
                   <input id="email" name="email" type="email" autocomplete="email" required>
                 </div>
               </div>
 
               <div class="field">
-                <label for="msg">Message</label>
+                <label for="msg" data-i18n="msg_label">Message</label>
                 <textarea id="msg" name="message" required></textarea>
               </div>
 
               <input type="hidden" name="_subject" value="Clear Thought Press inquiry">
 
               <div class="cta" style="margin: 6px 0 0;">
-                <button class="btn primary" type="submit">Send message</button>
+                <button class="btn primary" type="submit" data-i18n="send_btn">Send message</button>
               </div>
 
-              <div class="help">
+              <div class="help" data-i18n="help">
                 This form sends securely. Your email is not shown on the website.
               </div>
             </form>
           </div>
 
           <div class="card">
-            <h4 style="margin:0 0 6px;">Official stores</h4>
+            <h4 style="margin:0 0 6px;" data-i18n="stores_h">Official stores</h4>
             <ul style="margin:0; padding-left: 18px;">
-              <li><a href="https://payhip.com/ClearThoughtPress">Payhip</a></li>
-              <li><a href="https://english4u7.gumroad.com">Gumroad</a></li>
+              <li><a href="https://payhip.com/ClearThoughtPress" data-i18n="stores_payhip">Payhip</a></li>
+              <li><a href="https://english4u7.gumroad.com" data-i18n="stores_gumroad">Gumroad</a></li>
             </ul>
           </div>
         </div>
@@ -793,24 +793,24 @@
 
       <footer>
         <div>
-          <h5>Clear Thought Press</h5>
-          <div class="small">Independent micro-publisher of advanced English learning materials.</div>
-          <div class="legal">© Andrzej Łabudzki Jr. • All rights reserved.</div>
+          <h5 data-i18n="foot_name">Clear Thought Press</h5>
+          <div class="small" data-i18n="foot_desc">Independent micro-publisher of advanced English learning materials.</div>
+          <div class="legal" data-i18n="foot_legal">© Andrzej Łabudzki Jr. • All rights reserved.</div>
         </div>
 
         <div>
-          <h5>Navigate</h5>
+          <h5 data-i18n="foot_nav_h">Navigate</h5>
           <div class="small">
-            <a href="#about">About</a><br>
-            <a href="#books">Books</a><br>
-            <a href="#contact">Contact</a>
+            <a href="#about" data-i18n="nav_about">About</a><br>
+            <a href="#books" data-i18n="nav_books">Books</a><br>
+            <a href="#contact" data-i18n="nav_contact">Contact</a>
           </div>
         </div>
 
         <div>
-          <h5>Domain</h5>
+          <h5 data-i18n="foot_domain_h">Domain</h5>
           <div class="small"><span class="mono">clearthoughtpress.com</span></div>
-          <div class="legal">Built on GitHub Pages.</div>
+          <div class="legal" data-i18n="foot_host">Built on GitHub Pages.</div>
         </div>
       </footer>
     </main>
@@ -819,7 +819,7 @@
   <script>
     // Highlight current section in nav (simple + stable)
     (function(){
-      const links = Array.from(document.querySelectorAll('.nav a'));
+      const links = Array.from(document.querySelectorAll('.nav a')).filter(a => a.getAttribute('href')?.startsWith('#'));
       const sections = links
         .map(a => document.querySelector(a.getAttribute('href')))
         .filter(Boolean);
@@ -840,9 +840,187 @@
 
       sections.forEach(s => observer.observe(s));
 
-      // default on load
       const hash = location.hash?.replace('#','');
       if(hash) setActive(hash);
+    })();
+
+    // Language toggle (EN/PL) — Option A
+    (function(){
+      const dict = {
+        en: {
+          skip: "Skip to content",
+          brand_name: "Clear Thought Press",
+          brand_tag: "Independent micro-publisher",
+          nav_about: "About",
+          nav_books: "Books",
+          nav_contact: "Contact",
+          kicker: "Precision English • Structure • Clear thinking",
+          hero_title: "Language for people who refuse to think vaguely.",
+          hero_p:
+            "Clear Thought Press publishes advanced English learning materials for serious learners, teachers, and exam candidates. No noise, no “hacks” — just careful practice that builds control, accuracy, and meaning.",
+          cta_payhip: "Visit Payhip store",
+          cta_gumroad: "Visit Gumroad store",
+          pill_levels: "B1 → C2",
+          pill_right: "Workbooks • Keys • Diagnostic tools",
+          badge1a: "Exam-ready",
+          badge1b: "Designed for real performance",
+          badge2a: "Answer keys",
+          badge2b: "Clear solutions + checks",
+          badge3a: "Print-friendly",
+          badge3b: "Clean pages, low clutter",
+          badge4a: "Teacher-aware",
+          badge4b: "Built for classrooms & self-study",
+          pub_note_h: "Publisher’s note",
+          pub_note_p:
+            "We treat language as a tool for thought — not decoration. The goal is disciplined expression: precise meaning, stable structure, and confident output.",
+          about_h: "About",
+          about_p:
+            "Clear Thought Press is a small imprint built around one principle: better writing and speaking begins with clearer thinking. We publish materials that are intentionally spare, rigorous, and classroom-ready.",
+          books_h: "Books",
+          books_p:
+            "A small catalogue, built carefully. Each title focuses on repeatable skills, clean progression, and measurable improvement.",
+          feat_title: "Word Formation Exercises",
+          feat_sub: "B1–C2 • Sets • Answer key • Print-friendly",
+          feat_li1: "High-frequency transformations aligned with exam expectations",
+          feat_li2: "Clean structure: practice → check → repeat",
+          feat_li3: "Designed for both self-study and classroom use",
+          buy_payhip: "Buy on Payhip",
+          buy_gumroad: "Buy on Gumroad",
+          tag_workbook: "Workbook",
+          grid1_title: "Word Formation Exercises",
+          grid1_desc: "B1–C2 • Sets • Answer key",
+          grid2_title: "Diagnostic Test (B1 → C2)",
+          grid2_desc: "Placement + profile mapping",
+          grid3_title: "Teacher’s Guide",
+          grid3_desc: "Implementation notes + pacing",
+          card_buy_h: "Buy & download",
+          card_buy_p: "Digital editions and printable workbooks are available here:",
+          card_payhip: "Payhip",
+          card_gumroad: "Gumroad",
+          card_hint: "Want the page to show real covers? Add cover images later and I’ll wire them in cleanly.",
+          contact_h: "Contact",
+          contact_p: "For collaboration, schools, bulk licensing, or press inquiries, use the form below.",
+          form_h: "Publishing inquiries",
+          form_small: "Collaboration • institutional licensing • classroom bundles • press",
+          name_label: "Name",
+          email_label: "Your email",
+          msg_label: "Message",
+          send_btn: "Send message",
+          help: "This form sends securely. Your email is not shown on the website.",
+          stores_h: "Official stores",
+          stores_payhip: "Payhip",
+          stores_gumroad: "Gumroad",
+          foot_name: "Clear Thought Press",
+          foot_desc: "Independent micro-publisher of advanced English learning materials.",
+          foot_legal: "© Andrzej Łabudzki Jr. • All rights reserved.",
+          foot_nav_h: "Navigate",
+          foot_domain_h: "Domain",
+          foot_host: "Built on GitHub Pages."
+        },
+        pl: {
+          skip: "Przejdź do treści",
+          brand_name: "Clear Thought Press",
+          brand_tag: "Niezależne mikro-wydawnictwo",
+          nav_about: "O nas",
+          nav_books: "Książki",
+          nav_contact: "Kontakt",
+          kicker: "Precyzja • Struktura • Jasne myślenie",
+          hero_title: "Język dla ludzi, którzy nie godzą się na mętność.",
+          hero_p:
+            "Clear Thought Press publikuje zaawansowane materiały do nauki angielskiego dla ambitnych uczniów, nauczycieli i osób przygotowujących się do egzaminów. Bez hałasu i „szybkich trików” — tylko świadoma praktyka, która buduje kontrolę, poprawność i sens.",
+          cta_payhip: "Przejdź do sklepu Payhip",
+          cta_gumroad: "Przejdź do sklepu Gumroad",
+          pill_levels: "B1 → C2",
+          pill_right: "Zeszyty ćwiczeń • Klucze • Diagnostyka",
+          badge1a: "Pod egzamin",
+          badge1b: "Projekt pod realny wynik",
+          badge2a: "Klucze odpowiedzi",
+          badge2b: "Jasne rozwiązania + kontrola",
+          badge3a: "Do druku",
+          badge3b: "Czysty układ, minimum chaosu",
+          badge4a: "Dla nauczycieli",
+          badge4b: "Klasa i samodzielna praca",
+          pub_note_h: "Nota wydawcy",
+          pub_note_p:
+            "Traktujemy język jako narzędzie myślenia — nie ozdobę. Cel to zdyscyplinowana wypowiedź: precyzyjne znaczenie, stabilna struktura i pewny efekt.",
+          about_h: "O nas",
+          about_p:
+            "Clear Thought Press to małe wydawnictwo oparte na jednej zasadzie: lepsze pisanie i mówienie zaczyna się od jaśniejszego myślenia. Publikujemy materiały oszczędne, rygorystyczne i gotowe do pracy na lekcji.",
+          books_h: "Książki",
+          books_p:
+            "Mały katalog, budowany starannie. Każdy tytuł skupia się na powtarzalnych umiejętnościach, klarownej progresji i mierzalnym postępie.",
+          feat_title: "Word Formation Exercises",
+          feat_sub: "B1–C2 • Zestawy • Klucz • Do druku",
+          feat_li1: "Wysokoczęstotliwościowe transformacje zgodne z wymaganiami egzaminów",
+          feat_li2: "Czysta struktura: ćwicz → sprawdź → powtórz",
+          feat_li3: "Do samodzielnej pracy i do klasy",
+          buy_payhip: "Kup na Payhip",
+          buy_gumroad: "Kup na Gumroad",
+          tag_workbook: "Workbook",
+          grid1_title: "Word Formation Exercises",
+          grid1_desc: "B1–C2 • Zestawy • Klucz",
+          grid2_title: "Test diagnostyczny (B1 → C2)",
+          grid2_desc: "Poziom + profil umiejętności",
+          grid3_title: "Poradnik nauczyciela",
+          grid3_desc: "Wdrożenie + tempo pracy",
+          card_buy_h: "Kup i pobierz",
+          card_buy_p: "Wersje cyfrowe i do druku znajdziesz tutaj:",
+          card_payhip: "Payhip",
+          card_gumroad: "Gumroad",
+          card_hint: "Chcesz prawdziwe okładki na stronie? Dodaj pliki okładek, a ja je podepnę na czysto.",
+          contact_h: "Kontakt",
+          contact_p: "W sprawie współpracy, licencji dla szkół, pakietów klasowych lub zapytań prasowych użyj formularza poniżej.",
+          form_h: "Zapytania wydawnicze",
+          form_small: "Współpraca • licencje • pakiety • prasa",
+          name_label: "Imię i nazwisko",
+          email_label: "Twój e-mail",
+          msg_label: "Wiadomość",
+          send_btn: "Wyślij wiadomość",
+          help: "Formularz wysyła bezpiecznie. Twój e-mail nie jest widoczny na stronie.",
+          stores_h: "Oficjalne sklepy",
+          stores_payhip: "Payhip",
+          stores_gumroad: "Gumroad",
+          foot_name: "Clear Thought Press",
+          foot_desc: "Niezależne mikro-wydawnictwo materiałów do zaawansowanego angielskiego.",
+          foot_legal: "© Andrzej Łabudzki Jr. • Wszelkie prawa zastrzeżone.",
+          foot_nav_h: "Nawigacja",
+          foot_domain_h: "Domena",
+          foot_host: "Zbudowane na GitHub Pages."
+        }
+      };
+
+      const toggle = document.getElementById("langToggle");
+      if(!toggle) return;
+
+      const applyLang = (lang) => {
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          const val = dict?.[lang]?.[key];
+          if(typeof val === "string"){
+            el.textContent = val;
+          }
+        });
+
+        localStorage.setItem("ctp_lang", lang);
+        document.documentElement.setAttribute("lang", lang);
+
+        // Button shows the language you can switch TO
+        if(lang === "en"){
+          toggle.textContent = "PL";
+          toggle.setAttribute("aria-label", "Switch to Polish");
+        }else{
+          toggle.textContent = "EN";
+          toggle.setAttribute("aria-label", "Przełącz na angielski");
+        }
+      };
+
+      const saved = localStorage.getItem("ctp_lang");
+      applyLang(saved === "pl" ? "pl" : "en");
+
+      toggle.addEventListener("click", () => {
+        const current = localStorage.getItem("ctp_lang") || "en";
+        applyLang(current === "en" ? "pl" : "en");
+      });
     })();
   </script>
 </body>
