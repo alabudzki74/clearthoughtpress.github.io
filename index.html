@@ -25,9 +25,21 @@
       --shadow: 0 10px 30px rgba(18,20,23,.08);
       --radius: 16px;
       --radius2: 14px;
+      --focus: 0 0 0 4px rgba(47,95,179,.16);
+      --topbarH: 72px;
     }
 
     *{box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
+      scroll-padding-top: calc(var(--topbarH) + 16px);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{transition:none !important; animation:none !important}
+    }
 
     body{
       margin:0;
@@ -52,24 +64,46 @@
 
     a{color:inherit}
 
+    /* Skip link (proper, classic accessibility) */
+    .skip{
+      position:absolute;
+      left:12px;
+      top:12px;
+      transform: translateY(-200%);
+      background: rgba(255,255,255,.95);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-decoration:none;
+      box-shadow: 0 10px 24px rgba(18,20,23,.10);
+      z-index: 999;
+    }
+    .skip:focus{transform:none; outline:none; box-shadow: var(--focus), 0 10px 24px rgba(18,20,23,.10);}
+
     .wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 26px 18px 70px;
+      padding: 18px 18px 70px;
     }
 
+    /* Make sticky bar feel “real”: full width, centered content */
     .topbar{
       position: sticky;
       top: 0;
       z-index: 50;
+      background: linear-gradient(180deg, rgba(246,243,236,.92), rgba(246,243,236,.55));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line2);
+    }
+    .topbar-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding: 14px 0;
-      background: linear-gradient(180deg, rgba(246,243,236,.92), rgba(246,243,236,.55));
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid var(--line2);
+      min-height: var(--topbarH);
     }
 
     .brand{
@@ -89,6 +123,7 @@
       place-items:center;
       overflow:hidden;
       position: relative;
+      flex: 0 0 auto;
     }
     .mark img{
       width:100%;
@@ -134,11 +169,23 @@
       padding: 8px 10px;
       border-radius: 12px;
       border:1px solid transparent;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
     }
     .nav a:hover{
       border-color: var(--line);
       color: var(--ink);
       background: rgba(255,255,255,.65);
+    }
+    .nav a[aria-current="page"]{
+      border-color: rgba(176,138,46,.35);
+      color: var(--ink);
+      background: linear-gradient(180deg, rgba(176,138,46,.12), rgba(255,255,255,.75));
+    }
+
+    :focus-visible{
+      outline:none;
+      box-shadow: var(--focus);
+      border-radius: 12px;
     }
 
     .hero{
@@ -174,7 +221,7 @@
       margin: 0 0 10px;
       font-family: "Source Serif 4", serif;
       font-weight: 700;
-      font-size: 40px;
+      font-size: clamp(30px, 4vw, 40px);
       line-height:1.12;
       letter-spacing:.01em;
       color: var(--ink);
@@ -206,8 +253,13 @@
       color: var(--ink);
       background: rgba(255,255,255,.7);
       cursor:pointer;
+      transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
     }
-    .btn:hover{background: rgba(255,255,255,.95)}
+    .btn:hover{
+      background: rgba(255,255,255,.95);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(18,20,23,.08);
+    }
     button.btn{appearance:none; -webkit-appearance:none;}
 
     .btn.primary{
@@ -304,7 +356,13 @@
       background: rgba(255,255,255,.82);
       padding: 16px;
       box-shadow: 0 8px 18px rgba(18,20,23,.05);
+      transition: transform .14s ease, box-shadow .14s ease;
     }
+    .featured:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(18,20,23,.08);
+    }
+
     .featured-head{
       display:flex;
       gap: 14px;
@@ -342,6 +400,11 @@
       background: rgba(255,255,255,.78);
       overflow:hidden;
       box-shadow: 0 8px 18px rgba(18,20,23,.05);
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+    .book:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(18,20,23,.08);
     }
 
     .cover{
@@ -349,6 +412,7 @@
       position: relative;
       overflow:hidden;
       background: linear-gradient(180deg, rgba(176,138,46,.08), rgba(255,255,255,.65));
+      display:block;
     }
     .cover img{
       width:100%;
@@ -415,7 +479,6 @@
       .contact{grid-template-columns: 1fr}
     }
 
-    /* Email + contact form styles */
     .emailLink{
       font-weight: 600;
       color: var(--ink);
@@ -509,8 +572,10 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
+  <a class="skip" href="#top">Skip to content</a>
+
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
       <a class="brand" href="#top" aria-label="Clear Thought Press home">
         <div class="mark" aria-label="Logo">
           <img src="logo.png" alt="Clear Thought Press logo"
@@ -529,7 +594,9 @@
         <a href="#contact">Contact</a>
       </nav>
     </div>
+  </header>
 
+  <div class="wrap">
     <main id="top">
       <section class="hero">
         <div class="hero-grid">
@@ -616,16 +683,14 @@
 
             <div style="height:12px"></div>
 
+            <!-- FIXED: valid markup, no duplicate tags, no mismatched divs -->
             <div class="book-grid">
               <div class="book">
                 <a class="cover" href="https://payhip.com/ClearThoughtPress" target="_blank" rel="noopener noreferrer"
-   aria-label="Buy Word Formation Exercises on Payhip">
-  <img src="Cover.png" alt="Word Formation Exercises cover">
-  <span class="tag">Workbook</span>
-</a>
-
+                   aria-label="Buy Word Formation Exercises on Payhip">
+                  <img src="Cover.png" alt="Word Formation Exercises cover">
                   <span class="tag">Workbook</span>
-                </div>
+                </a>
                 <div class="meta">
                   <p class="title">Word Formation Exercises</p>
                   <p class="desc">B1–C2 • Sets • Answer key</p>
@@ -633,9 +698,7 @@
               </div>
 
               <div class="book">
-                <div class="cover placeholder">
-                  <span class="tag">Coming soon</span>
-                </div>
+                <div class="cover placeholder" aria-hidden="true"></div>
                 <div class="meta">
                   <p class="title">Diagnostic Test (B1 → C2)</p>
                   <p class="desc">Placement + profile mapping</p>
@@ -643,9 +706,7 @@
               </div>
 
               <div class="book">
-                <div class="cover placeholder">
-                  <span class="tag">Coming soon</span>
-                </div>
+                <div class="cover placeholder" aria-hidden="true"></div>
                 <div class="meta">
                   <p class="title">Teacher’s Guide</p>
                   <p class="desc">Implementation notes + pacing</p>
@@ -688,11 +749,9 @@
               Collaboration • institutional licensing • classroom bundles • press
             </p>
 
-            <!-- FORM (fixed) -->
             <form class="form"
                   action="https://formspree.io/f/mqeazgle"
                   method="POST">
-
               <div class="row">
                 <div class="field">
                   <label for="name">Name</label>
@@ -756,5 +815,35 @@
       </footer>
     </main>
   </div>
+
+  <script>
+    // Highlight current section in nav (simple + stable)
+    (function(){
+      const links = Array.from(document.querySelectorAll('.nav a'));
+      const sections = links
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+
+      const setActive = (id) => {
+        links.forEach(a => a.removeAttribute('aria-current'));
+        const active = links.find(a => a.getAttribute('href') === '#' + id);
+        if(active) active.setAttribute('aria-current', 'page');
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            setActive(entry.target.id);
+          }
+        });
+      }, { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 });
+
+      sections.forEach(s => observer.observe(s));
+
+      // default on load
+      const hash = location.hash?.replace('#','');
+      if(hash) setActive(hash);
+    })();
+  </script>
 </body>
 </html>
