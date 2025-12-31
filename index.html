@@ -494,7 +494,7 @@
     footer h5{
       margin:0 0 6px;
       font-size: 12px;
-      letter-spacing: .14em;
+      letter-spacing:.14em;
       text-transform: uppercase;
       color: var(--muted);
     }
@@ -674,55 +674,49 @@
       <section id="contact" class="section">
         <h3>Contact</h3>
         <p class="lede">
-          For collaboration, schools, bulk licensing, or press inquiries, use the details below.
+          For collaboration, schools, bulk licensing, or press inquiries, use the form below.
         </p>
 
         <div class="contact">
           <div class="card">
             <h4 style="margin:0 0 6px;">Publishing inquiries</h4>
             <p class="small" style="margin:0;">
-              Collaboration • institutional licensing • classroom bundles • press:
+              Collaboration • institutional licensing • classroom bundles • press
             </p>
 
-            <p style="margin:10px 0 0;">
-              <strong>Email:</strong>
-              <a class="emailLink mono" href="mailto:e4u.englishforyou@gmail.com">e4u.englishforyou@gmail.com</a>
-            </p>
-
+            <!-- FORM (fixed) -->
             <form class="form"
-      <form class="form"
-      action="https://formspree.io/f/mqeazgle"
-      method="POST">
+                  action="https://formspree.io/f/mqeazgle"
+                  method="POST">
 
-      method="POST">
+              <div class="row">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" autocomplete="name" required>
+                </div>
 
-  <div class="row">
-    <div class="field">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" autocomplete="name" required>
-    </div>
+                <div class="field">
+                  <label for="email">Your email</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required>
+                </div>
+              </div>
 
-    <div class="field">
-      <label for="email">Your email</label>
-      <input id="email" name="email" type="email" autocomplete="email" required>
-    </div>
-  </div>
+              <div class="field">
+                <label for="msg">Message</label>
+                <textarea id="msg" name="message" required></textarea>
+              </div>
 
-  <div class="field">
-    <label for="msg">Message</label>
-    <textarea id="msg" name="message" required></textarea>
-  </div>
+              <input type="hidden" name="_subject" value="Clear Thought Press inquiry">
 
-  <input type="hidden" name="_subject" value="Clear Thought Press inquiry">
+              <div class="cta" style="margin: 6px 0 0;">
+                <button class="btn primary" type="submit">Send message</button>
+              </div>
 
-  <div class="cta" style="margin: 6px 0 0;">
-    <button class="btn primary" type="submit">Send message</button>
-  </div>
-
-  <div class="help">
-    This form sends securely. Your email is not shown on the website.
-  </div>
-</form>
+              <div class="help">
+                This form sends securely. Your email is not shown on the website.
+              </div>
+            </form>
+          </div>
 
           <div class="card">
             <h4 style="margin:0 0 6px;">Official stores</h4>
