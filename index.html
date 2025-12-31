@@ -9,44 +9,72 @@
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b0c10;
-      --paper:#0f1117;
-      --card:#121522;
-      --text:#e9ecf1;
-      --muted:#b7bdc8;
-      --line:rgba(255,255,255,.10);
-      --accent:#d6b15e; /* warm “publisher” gold */
-      --accent2:#88a9ff;
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-      --radius: 18px;
+      /* Academic palette: paper + ink + muted gold */
+      --bg:#f6f3ec;          /* warm paper */
+      --paper:#ffffff;       /* true white card */
+      --ink:#121417;         /* near-black */
+      --text:#1b1f24;
+      --muted:#5b6470;
+      --line:rgba(18,20,23,.12);
+      --line2:rgba(18,20,23,.08);
+      --accent:#b08a2e;      /* restrained “publisher” gold */
+      --accent2:#2f5fb3;     /* academic blue */
+      --shadow: 0 10px 30px rgba(18,20,23,.08);
+      --radius: 16px;
+      --radius2: 14px;
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(214,177,94,.18), transparent 55%),
-                  radial-gradient(900px 500px at 85% 30%, rgba(136,169,255,.15), transparent 60%),
-                  var(--bg);
+      background:
+        radial-gradient(900px 500px at 85% 10%, rgba(47,95,179,.06), transparent 60%),
+        radial-gradient(900px 500px at 15% 0%, rgba(176,138,46,.08), transparent 55%),
+        var(--bg);
       color:var(--text);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.55;
     }
+
+    /* subtle paper grain */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:multiply;
+    }
+
     a{color:inherit}
+
     .wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 34px 18px 70px;
+      padding: 26px 18px 70px;
     }
+
+    /* Sticky academic header */
     .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding: 10px 0 26px;
+      padding: 14px 0;
+      background: linear-gradient(180deg, rgba(246,243,236,.92), rgba(246,243,236,.55));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line2);
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -54,39 +82,46 @@
       text-decoration:none;
     }
 
-    /* LOGO: uses your uploaded file */
-    .logo{
-      height:44px;
-      width:auto;
-      display:block;
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,.35));
-    }
-
-    /* Keep .mark in case you ever want a fallback square */
+    /* Logo slot: supports either text mark OR image */
     .mark{
-      width:44px;height:44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(214,177,94,.95), rgba(136,169,255,.75));
-      box-shadow: var(--shadow);
+      width:46px;height:46px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #fbfaf7);
+      box-shadow: 0 8px 18px rgba(18,20,23,.06);
       display:grid;
       place-items:center;
-      color:#0b0c10;
+      overflow:hidden;
+    }
+    .mark img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      padding:6px;
+      display:block;
+    }
+    .mark span{
       font-weight:800;
       letter-spacing:.06em;
+      color: var(--ink);
+      font-size: 14px;
     }
+
     .brand h1{
       margin:0;
-      font-size: 16px;
-      letter-spacing:.02em;
+      font-size: 15px;
+      letter-spacing:.01em;
+      color: var(--ink);
     }
     .brand p{
       margin:0;
       color: var(--muted);
       font-size: 12px;
     }
+
     .nav{
       display:flex;
-      gap: 14px;
+      gap: 10px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
@@ -100,40 +135,32 @@
     }
     .nav a:hover{
       border-color: var(--line);
-      color: var(--text);
-      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      background: rgba(255,255,255,.65);
     }
 
     .hero{
+      margin-top: 16px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        linear-gradient(135deg, rgba(214,177,94,.10), rgba(136,169,255,.08));
+        linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.78));
       box-shadow: var(--shadow);
       padding: 34px 26px;
       position:relative;
       overflow:hidden;
     }
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:-60px -60px auto auto;
-      width:240px;height:240px;
-      background: radial-gradient(circle at 30% 30%, rgba(214,177,94,.35), transparent 60%);
-      filter: blur(2px);
-      transform: rotate(10deg);
-      pointer-events:none;
-    }
+
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.3fr .7fr;
+      grid-template-columns: 1.2fr .8fr;
       gap: 18px;
       align-items:start;
     }
     @media (max-width: 900px){
       .hero-grid{grid-template-columns: 1fr}
     }
+
     .kicker{
       color: var(--muted);
       text-transform: uppercase;
@@ -141,42 +168,49 @@
       font-size: 12px;
       margin: 0 0 10px;
     }
+
     .hero h2{
       margin: 0 0 10px;
       font-family: "Source Serif 4", serif;
-      font-weight: 600;
-      font-size: 38px;
+      font-weight: 700;
+      font-size: 40px;
       line-height:1.12;
       letter-spacing:.01em;
+      color: var(--ink);
     }
+
     .hero p{
-      margin: 0 0 16px;
+      margin: 0 0 14px;
       color: var(--muted);
-      max-width: 62ch;
+      max-width: 64ch;
     }
+
     .cta{
       display:flex;
       gap: 10px;
       flex-wrap:wrap;
-      margin-top: 6px;
+      margin-top: 10px;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
       gap:10px;
       padding: 11px 14px;
-      border-radius: 14px;
+      border-radius: 12px;
       border:1px solid var(--line);
       text-decoration:none;
       font-size: 14px;
-      color: var(--text);
-      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      background: rgba(255,255,255,.7);
     }
-    .btn:hover{background: rgba(255,255,255,.07)}
+    .btn:hover{background: rgba(255,255,255,.95)}
+
     .btn.primary{
-      border-color: rgba(214,177,94,.45);
-      background: linear-gradient(180deg, rgba(214,177,94,.18), rgba(255,255,255,.03));
+      border-color: rgba(176,138,46,.35);
+      background: linear-gradient(180deg, rgba(176,138,46,.14), rgba(255,255,255,.85));
     }
+
     .pill{
       margin-top: 14px;
       display:inline-flex;
@@ -187,34 +221,66 @@
       border:1px solid var(--line);
       padding: 8px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.03);
+      background: rgba(255,255,255,.65);
       width: fit-content;
     }
+
     .sidecard{
       border:1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(15,17,23,.65);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.72);
       padding: 16px;
     }
     .sidecard h3{
       margin:0 0 8px;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: .12em;
+      letter-spacing: .14em;
     }
     .sidecard p{margin:0;color:var(--text);font-size:14px}
-    .divider{height:1px;background:var(--line); margin: 26px 0}
+
+    .badges{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top: 16px;
+    }
+    @media (max-width: 900px){
+      .badges{grid-template-columns: 1fr 1fr}
+    }
+    .badge{
+      border:1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .badge strong{color:var(--ink); font-weight:600}
+
+    .divider{
+      height:1px;
+      background: var(--line);
+      margin: 26px 0;
+    }
 
     .section{
       margin-top: 26px;
     }
     .section h3{
-      margin:0 0 10px;
+      margin:0 0 8px;
       font-family: "Source Serif 4", serif;
-      font-size: 22px;
-      font-weight: 600;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
     }
+    .lede{
+      margin: 0 0 14px;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
     .grid3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -223,33 +289,70 @@
     @media (max-width: 900px){
       .grid3{grid-template-columns: 1fr}
     }
+
     .card{
       border:1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(18,21,34,.65);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.78);
       padding: 16px;
+      box-shadow: 0 8px 18px rgba(18,20,23,.05);
     }
+
     .card .icon{
       width:34px;height:34px;
       display:grid;
       place-items:center;
       border-radius: 12px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.9);
       margin-bottom: 10px;
+      color: var(--ink);
     }
-    .card h4{margin:0 0 6px; font-size: 16px}
+
+    .card h4{margin:0 0 6px; font-size: 16px; color: var(--ink)}
     .card p{margin:0; color: var(--muted); font-size: 14px}
 
     .books{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 14px;
       align-items:start;
     }
     @media (max-width: 900px){
       .books{grid-template-columns: 1fr}
     }
+
+    .featured{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.82);
+      padding: 16px;
+      box-shadow: 0 8px 18px rgba(18,20,23,.05);
+    }
+    .featured-head{
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+    }
+    .featured-cover{
+      width: 86px;
+      height: 110px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(176,138,46,.10), rgba(47,95,179,.06));
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      padding: 10px;
+      color: var(--ink);
+      font-family: "Source Serif 4", serif;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .featured h4{margin:0 0 6px; font-size: 18px; color: var(--ink)}
+    .featured ul{margin:10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px}
+    .featured .cta{margin-top: 12px}
+
     .book-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -260,29 +363,29 @@
     }
     .book{
       border:1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(18,21,34,.65);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.78);
       overflow:hidden;
+      box-shadow: 0 8px 18px rgba(18,20,23,.05);
     }
     .cover{
-      height: 160px;
+      height: 140px;
       background:
-        linear-gradient(135deg, rgba(214,177,94,.18), rgba(136,169,255,.10)),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+        linear-gradient(180deg, rgba(176,138,46,.08), rgba(255,255,255,.65));
       display:flex;
       align-items:flex-end;
       padding: 12px;
     }
     .cover span{
       font-size: 12px;
-      color: rgba(255,255,255,.85);
+      color: var(--ink);
       border:1px solid var(--line);
-      background: rgba(0,0,0,.25);
+      background: rgba(255,255,255,.85);
       padding: 6px 8px;
       border-radius: 999px;
     }
     .book .meta{padding: 12px}
-    .book .title{margin:0 0 4px; font-size: 14px; font-weight: 600}
+    .book .title{margin:0 0 4px; font-size: 14px; font-weight: 600; color: var(--ink)}
     .book .desc{margin:0; font-size: 13px; color: var(--muted)}
 
     .contact{
@@ -293,31 +396,52 @@
     @media (max-width: 900px){
       .contact{grid-template-columns: 1fr}
     }
-    .small{
-      font-size: 13px;
-      color: var(--muted);
-    }
+
+    .small{font-size: 13px; color: var(--muted)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
     footer{
       margin-top: 34px;
       padding-top: 18px;
       border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 13px;
-      display:flex;
-      justify-content:space-between;
+      display:grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
       gap: 14px;
-      flex-wrap:wrap;
     }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    @media (max-width: 900px){
+      footer{grid-template-columns: 1fr}
+    }
+    footer h5{
+      margin:0 0 6px;
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    footer a{color: var(--ink); text-decoration:none; border-bottom: 1px solid rgba(176,138,46,.25)}
+    footer a:hover{border-bottom-color: rgba(176,138,46,.6)}
+    .legal{
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <div class="topbar">
-      <a class="brand" href="#top">
-        <!-- CHANGE THIS to logo.svg if your file is SVG -->
-        <img class="logo" src="logo.png" alt="Clear Thought Press logo">
+      <a class="brand" href="#top" aria-label="Clear Thought Press home">
+        <div class="mark" aria-label="Logo">
+          <!-- OPTION 1: Use your logo image:
+               Put your logo file in the repo (e.g., logo.png),
+               then replace the span below with:
+               <img src="logo.png" alt="Clear Thought Press logo">
+          -->
+          <span>CTP</span>
+        </div>
         <div>
           <h1>Clear Thought Press</h1>
           <p>Independent micro-publisher</p>
@@ -339,7 +463,7 @@
             <h2>Language for people who refuse to think vaguely.</h2>
             <p>
               Clear Thought Press publishes advanced English learning materials for serious learners, teachers,
-              and exam candidates. Our focus is not noise, hacks, or shortcuts — but precision, control, and meaning.
+              and exam candidates. No noise, no “hacks” — just careful practice that builds control, accuracy, and meaning.
             </p>
 
             <div class="cta">
@@ -351,13 +475,20 @@
               <span class="mono">B1 → C2</span>
               <span>Workbooks • Keys • Diagnostic tools</span>
             </div>
+
+            <div class="badges" aria-label="Highlights">
+              <div class="badge"><strong>Exam-ready</strong><br>Designed for real performance</div>
+              <div class="badge"><strong>Answer keys</strong><br>Clear solutions + checks</div>
+              <div class="badge"><strong>Print-friendly</strong><br>Clean pages, low clutter</div>
+              <div class="badge"><strong>Teacher-aware</strong><br>Built for classrooms & self-study</div>
+            </div>
           </div>
 
           <aside class="sidecard" aria-label="Publisher note">
             <h3>Publisher’s note</h3>
             <p>
-              We believe language is a tool for thought, not decoration.
-              Our materials reward accuracy, structure, and disciplined expression.
+              We treat language as a tool for thought — not decoration.
+              The goal is disciplined expression: precise meaning, stable structure, and confident output.
             </p>
           </aside>
         </div>
@@ -367,13 +498,18 @@
 
       <section id="about" class="section">
         <h3>About</h3>
+        <p class="lede">
+          Clear Thought Press is a small imprint built around one principle: better writing and speaking begins with clearer thinking.
+          We publish materials that are intentionally spare, rigorous, and classroom-ready.
+        </p>
+
         <div class="grid3">
           <div class="card">
             <div class="icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 22a10 10 0 1 0-10-10" stroke="currentColor" stroke-width="2" opacity=".85"/>
-                <path d="M12 18a6 6 0 1 0-6-6" stroke="currentColor" stroke-width="2" opacity=".85"/>
-                <path d="M12 14a2 2 0 1 0-2-2" stroke="currentColor" stroke-width="2" opacity=".85"/>
+                <path d="M12 22a10 10 0 1 0-10-10" stroke="currentColor" stroke-width="2" opacity=".9"/>
+                <path d="M12 18a6 6 0 1 0-6-6" stroke="currentColor" stroke-width="2" opacity=".9"/>
+                <path d="M12 14a2 2 0 1 0-2-2" stroke="currentColor" stroke-width="2" opacity=".9"/>
               </svg>
             </div>
             <h4>Precision</h4>
@@ -383,7 +519,7 @@
           <div class="card">
             <div class="icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M4 4h16v6H4zM4 14h7v6H4zM13 14h7v6h-7z" stroke="currentColor" stroke-width="2" opacity=".85"/>
+                <path d="M4 4h16v6H4zM4 14h7v6H4zM13 14h7v6h-7z" stroke="currentColor" stroke-width="2" opacity=".9"/>
               </svg>
             </div>
             <h4>Structure</h4>
@@ -393,8 +529,8 @@
           <div class="card">
             <div class="icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 20h9" stroke="currentColor" stroke-width="2" opacity=".85"/>
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5z" stroke="currentColor" stroke-width="2" opacity=".85"/>
+                <path d="M12 20h9" stroke="currentColor" stroke-width="2" opacity=".9"/>
+                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5z" stroke="currentColor" stroke-width="2" opacity=".9"/>
               </svg>
             </div>
             <h4>Real output</h4>
@@ -407,30 +543,60 @@
 
       <section id="books" class="section">
         <h3>Books</h3>
+        <p class="lede">
+          A small catalogue, built carefully. Each title focuses on repeatable skills, clean progression, and measurable improvement.
+        </p>
 
         <div class="books">
-          <div class="book-grid">
-            <div class="book">
-              <div class="cover"><span>Workbook</span></div>
-              <div class="meta">
-                <p class="title">Word Formation Exercises</p>
-                <p class="desc">B1–C2 • Sets • Answer key</p>
+          <div>
+            <div class="featured">
+              <div class="featured-head">
+                <div class="featured-cover">CTP</div>
+                <div>
+                  <h4 style="margin:0;">Word Formation Exercises</h4>
+                  <p class="small" style="margin:4px 0 0;">
+                    B1–C2 • Sets • Answer key • Print-friendly
+                  </p>
+                </div>
+              </div>
+
+              <ul>
+                <li>High-frequency transformations aligned with exam expectations</li>
+                <li>Clean structure: practice → check → repeat</li>
+                <li>Designed for both self-study and classroom use</li>
+              </ul>
+
+              <div class="cta">
+                <a class="btn primary" href="https://payhip.com/ClearThoughtPress">Buy on Payhip</a>
+                <a class="btn" href="https://english4u7.gumroad.com">Buy on Gumroad</a>
               </div>
             </div>
 
-            <div class="book">
-              <div class="cover"><span>Coming soon</span></div>
-              <div class="meta">
-                <p class="title">Diagnostic Test (B1 → C2)</p>
-                <p class="desc">Placement + profile mapping</p>
-              </div>
-            </div>
+            <div style="height:12px"></div>
 
-            <div class="book">
-              <div class="cover"><span>Coming soon</span></div>
-              <div class="meta">
-                <p class="title">Teacher’s Guide</p>
-                <p class="desc">Implementation notes + pacing</p>
+            <div class="book-grid">
+              <div class="book">
+                <div class="cover"><span>Workbook</span></div>
+                <div class="meta">
+                  <p class="title">Word Formation Exercises</p>
+                  <p class="desc">B1–C2 • Sets • Answer key</p>
+                </div>
+              </div>
+
+              <div class="book">
+                <div class="cover"><span>Coming soon</span></div>
+                <div class="meta">
+                  <p class="title">Diagnostic Test (B1 → C2)</p>
+                  <p class="desc">Placement + profile mapping</p>
+                </div>
+              </div>
+
+              <div class="book">
+                <div class="cover"><span>Coming soon</span></div>
+                <div class="meta">
+                  <p class="title">Teacher’s Guide</p>
+                  <p class="desc">Implementation notes + pacing</p>
+                </div>
               </div>
             </div>
           </div>
@@ -444,6 +610,12 @@
               <a class="btn primary" href="https://payhip.com/ClearThoughtPress">Payhip</a>
               <a class="btn" href="https://english4u7.gumroad.com">Gumroad</a>
             </div>
+
+            <div class="divider" style="margin:16px 0"></div>
+
+            <p class="small" style="margin:0;">
+              Want the page to show real covers? Add cover images later and I’ll wire them in cleanly.
+            </p>
           </div>
         </div>
       </section>
@@ -452,11 +624,15 @@
 
       <section id="contact" class="section">
         <h3>Contact</h3>
+        <p class="lede">
+          For collaboration, schools, bulk licensing, or press inquiries, use the details below.
+        </p>
+
         <div class="contact">
           <div class="card">
             <h4 style="margin:0 0 6px;">Publishing inquiries</h4>
             <p class="small" style="margin:0;">
-              For collaboration, schools, bulk licensing, or press inquiries:
+              Collaboration • institutional licensing • classroom bundles • press:
             </p>
             <p style="margin:10px 0 0;">
               <strong>Email:</strong> <span class="mono">contact@clearthoughtpress.com</span><br>
@@ -465,22 +641,41 @@
           </div>
 
           <div class="card">
-            <h4 style="margin:0 0 6px;">Quick links</h4>
-            <p class="small" style="margin:0 0 12px;">Official stores:</p>
+            <h4 style="margin:0 0 6px;">Official stores</h4>
             <ul style="margin:0; padding-left: 18px;">
-              <li><a href="https://payhip.com/ClearThoughtPress">Payhip store</a></li>
-              <li><a href="https://english4u7.gumroad.com">Gumroad store</a></li>
+              <li><a href="https://payhip.com/ClearThoughtPress">Payhip</a></li>
+              <li><a href="https://english4u7.gumroad.com">Gumroad</a></li>
             </ul>
+            <div class="legal">
+              Tip: once your HTTPS certificate is issued in GitHub Pages, you’ll look even more “real publisher.”
+            </div>
           </div>
         </div>
       </section>
 
       <footer>
-        <div>© Andrzej Łabudzki Jr. • Clear Thought Press</div>
-        <div class="mono">clearthoughtpress.com</div>
+        <div>
+          <h5>Clear Thought Press</h5>
+          <div class="small">Independent micro-publisher of advanced English learning materials.</div>
+          <div class="legal">© Andrzej Łabudzki Jr. • All rights reserved.</div>
+        </div>
+
+        <div>
+          <h5>Navigate</h5>
+          <div class="small">
+            <a href="#about">About</a><br>
+            <a href="#books">Books</a><br>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div>
+          <h5>Domain</h5>
+          <div class="small"><span class="mono">clearthoughtpress.com</span></div>
+          <div class="legal">Built on GitHub Pages.</div>
+        </div>
       </footer>
     </main>
   </div>
 </body>
 </html>
-
