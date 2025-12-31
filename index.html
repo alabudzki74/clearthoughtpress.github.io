@@ -96,12 +96,6 @@
       padding:6px;
       display:block;
     }
-    .mark span{
-      font-weight:800;
-      letter-spacing:.06em;
-      color: var(--ink);
-      font-size: 14px;
-    }
 
     .brand h1{
       margin:0;
@@ -139,8 +133,7 @@
       margin-top: 16px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.78));
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.78));
       box-shadow: var(--shadow);
       padding: 34px 26px;
       position:relative;
@@ -294,20 +287,6 @@
       box-shadow: 0 8px 18px rgba(18,20,23,.05);
     }
 
-    .card .icon{
-      width:34px;height:34px;
-      display:grid;
-      place-items:center;
-      border-radius: 12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.9);
-      margin-bottom: 10px;
-      color: var(--ink);
-    }
-
-    .card h4{margin:0 0 6px; font-size: 16px; color: var(--ink)}
-    .card p{margin:0; color: var(--muted); font-size: 14px}
-
     .books{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -331,7 +310,6 @@
       align-items:flex-start;
     }
 
-    /* ✅ Featured cover now supports REAL image */
     .featured-cover{
       width: 86px;
       height: 110px;
@@ -347,10 +325,6 @@
       object-fit:cover;
       display:block;
     }
-
-    .featured h4{margin:0 0 6px; font-size: 18px; color: var(--ink)}
-    .featured ul{margin:10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px}
-    .featured .cta{margin-top: 12px}
 
     .book-grid{
       display:grid;
@@ -368,7 +342,6 @@
       box-shadow: 0 8px 18px rgba(18,20,23,.05);
     }
 
-    /* ✅ FIXED: cover area is now a proper image container */
     .cover{
       height: 180px;
       position: relative;
@@ -389,6 +362,33 @@
       color: var(--ink);
       border:1px solid var(--line);
       background: rgba(255,255,255,.90);
+      padding: 6px 8px;
+      border-radius: 999px;
+    }
+
+    /* ✅ NEW: placeholder cover style (no image) */
+    .cover.placeholder{
+      background:
+        linear-gradient(180deg, rgba(47,95,179,.08), rgba(255,255,255,.82)),
+        repeating-linear-gradient(
+          135deg,
+          rgba(18,20,23,.06),
+          rgba(18,20,23,.06) 10px,
+          rgba(18,20,23,.03) 10px,
+          rgba(18,20,23,.03) 20px
+        );
+    }
+    .cover.placeholder::after{
+      content:"In preparation";
+      position:absolute;
+      top:12px;
+      left:12px;
+      font-size: 11px;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      color: rgba(18,20,23,.55);
+      border:1px solid rgba(18,20,23,.10);
+      background: rgba(255,255,255,.7);
       padding: 6px 8px;
       border-radius: 999px;
     }
@@ -444,10 +444,6 @@
     <div class="topbar">
       <a class="brand" href="#top" aria-label="Clear Thought Press home">
         <div class="mark" aria-label="Logo">
-          <!-- IMPORTANT:
-               Rename your logo file to EXACTLY: Logo.png
-               and upload it next to index.html in the repo.
-          -->
           <img src="Logo.png" alt="Clear Thought Press logo">
         </div>
         <div>
@@ -510,41 +506,6 @@
           Clear Thought Press is a small imprint built around one principle: better writing and speaking begins with clearer thinking.
           We publish materials that are intentionally spare, rigorous, and classroom-ready.
         </p>
-
-        <div class="grid3">
-          <div class="card">
-            <div class="icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 22a10 10 0 1 0-10-10" stroke="currentColor" stroke-width="2" opacity=".9"/>
-                <path d="M12 18a6 6 0 1 0-6-6" stroke="currentColor" stroke-width="2" opacity=".9"/>
-                <path d="M12 14a2 2 0 1 0-2-2" stroke="currentColor" stroke-width="2" opacity=".9"/>
-              </svg>
-            </div>
-            <h4>Precision</h4>
-            <p>We train accuracy: meaning, register, nuance, and control.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M4 4h16v6H4zM4 14h7v6H4zM13 14h7v6h-7z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-              </svg>
-            </div>
-            <h4>Structure</h4>
-            <p>Clear patterns. Clean practice. No cluttered “busywork”.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 20h9" stroke="currentColor" stroke-width="2" opacity=".9"/>
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-              </svg>
-            </div>
-            <h4>Real output</h4>
-            <p>Materials designed for writing, speaking, and exam performance.</p>
-          </div>
-        </div>
       </section>
 
       <div class="divider"></div>
@@ -596,9 +557,9 @@
                 </div>
               </div>
 
+              <!-- ✅ FIXED: Placeholder now has NO image -->
               <div class="book">
-                <div class="cover">
-                  <img src="Cover.png" alt="Placeholder cover">
+                <div class="cover placeholder">
                   <span class="tag">Coming soon</span>
                 </div>
                 <div class="meta">
@@ -607,9 +568,9 @@
                 </div>
               </div>
 
+              <!-- ✅ FIXED: Placeholder now has NO image -->
               <div class="book">
-                <div class="cover">
-                  <img src="Cover.png" alt="Placeholder cover">
+                <div class="cover placeholder">
                   <span class="tag">Coming soon</span>
                 </div>
                 <div class="meta">
@@ -665,9 +626,6 @@
               <li><a href="https://payhip.com/ClearThoughtPress">Payhip</a></li>
               <li><a href="https://english4u7.gumroad.com">Gumroad</a></li>
             </ul>
-            <div class="legal">
-              Tip: once your HTTPS certificate is issued in GitHub Pages, you’ll look even more “real publisher.”
-            </div>
           </div>
         </div>
       </section>
@@ -698,4 +656,5 @@
   </div>
 </body>
 </html>
+
 
