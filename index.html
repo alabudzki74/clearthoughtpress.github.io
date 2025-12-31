@@ -27,8 +27,8 @@
       --radius2: 14px;
       --focus: 0 0 0 4px rgba(47,95,179,.16);
 
-      /* UPDATED: slightly taller topbar to fit slightly bigger mark */
-      --topbarH: 102px;
+      /* UPDATED: taller topbar to fit larger mark */
+      --topbarH: 116px;
     }
 
     *{box-sizing:border-box}
@@ -99,7 +99,7 @@
     .topbar-inner{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 12px 18px;
+      padding: 10px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -110,23 +110,23 @@
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:16px;
       text-decoration:none;
-      min-width: 240px;
+      min-width: 260px;
     }
 
-    /* UPDATED: slightly bigger again */
+    /* UPDATED: bigger + clearer + a touch more optical weight */
     .mark{
-      width:76px;
-      height:76px;
-      border-radius: 16px;
+      width:90px;
+      height:90px;
+      border-radius: 18px;
 
-      border: 1px solid rgba(18,20,23,.16);
-      background: linear-gradient(180deg, #ffffff, #f6f1e6);
+      border: 1px solid rgba(18,20,23,.20);
+      background: linear-gradient(180deg, #ffffff, #f3ecdd);
 
       box-shadow:
-        0 12px 26px rgba(18,20,23,.12),
-        0 1px 0 rgba(255,255,255,.70) inset;
+        0 16px 34px rgba(18,20,23,.14),
+        0 1px 0 rgba(255,255,255,.72) inset;
 
       display:grid;
       place-items:center;
@@ -135,16 +135,14 @@
       flex: 0 0 auto;
     }
 
+    /* UPDATED: the real win — stop shrinking the artwork inside the box */
     .mark img{
       width:100%;
       height:100%;
       object-fit:contain;
-
-      /* a touch less padding so the mark reads bigger */
-      padding:2px;
-
+      padding:0;
       display:block;
-      filter: contrast(1.10) saturate(1.05) drop-shadow(0 1px 0 rgba(0,0,0,.06));
+      filter: contrast(1.14) saturate(1.06) drop-shadow(0 1px 0 rgba(0,0,0,.07));
     }
 
     .mark .fallback-text{
