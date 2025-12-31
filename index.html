@@ -88,6 +88,7 @@
       display:grid;
       place-items:center;
       overflow:hidden;
+      position: relative;
     }
     .mark img{
       width:100%;
@@ -96,6 +97,17 @@
       padding:6px;
       display:block;
     }
+
+    /* ✅ NEW: graceful fallback if logo image fails */
+    .mark .fallback-text{
+      display:none;
+      font-weight:800;
+      letter-spacing:.06em;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .mark.fallback img{display:none;}
+    .mark.fallback .fallback-text{display:block;}
 
     .brand h1{
       margin:0;
@@ -270,23 +282,6 @@
       max-width: 72ch;
     }
 
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 900px){
-      .grid3{grid-template-columns: 1fr}
-    }
-
-    .card{
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      background: rgba(255,255,255,.78);
-      padding: 16px;
-      box-shadow: 0 8px 18px rgba(18,20,23,.05);
-    }
-
     .books{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -366,7 +361,7 @@
       border-radius: 999px;
     }
 
-    /* ✅ NEW: placeholder cover style (no image) */
+    /* ✅ placeholder cover style (no image) */
     .cover.placeholder{
       background:
         linear-gradient(180deg, rgba(47,95,179,.08), rgba(255,255,255,.82)),
@@ -444,7 +439,11 @@
     <div class="topbar">
       <a class="brand" href="#top" aria-label="Clear Thought Press home">
         <div class="mark" aria-label="Logo">
-          <img src="Logo.png" alt="Clear Thought Press logo">
+          <!-- ✅ Fix #1: use lowercase filename to avoid case-sensitivity issues on GitHub Pages -->
+          <!-- ✅ Fix #2: if it fails, hide the broken image and show CTP text -->
+          <img src="logo.png" alt="Clear Thought Press logo"
+               onerror="this.style.display='none'; this.parentElement.classList.add('fallback');">
+          <span class="fallback-text">CTP</span>
         </div>
         <div>
           <h1>Clear Thought Press</h1>
@@ -557,7 +556,6 @@
                 </div>
               </div>
 
-              <!-- ✅ FIXED: Placeholder now has NO image -->
               <div class="book">
                 <div class="cover placeholder">
                   <span class="tag">Coming soon</span>
@@ -568,7 +566,6 @@
                 </div>
               </div>
 
-              <!-- ✅ FIXED: Placeholder now has NO image -->
               <div class="book">
                 <div class="cover placeholder">
                   <span class="tag">Coming soon</span>
@@ -656,5 +653,4 @@
   </div>
 </body>
 </html>
-
 
